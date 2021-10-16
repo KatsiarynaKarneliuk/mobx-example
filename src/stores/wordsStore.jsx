@@ -8,9 +8,12 @@ import { action, observable, makeautoObservable } from 'mobx';
 /* export const Context = React.createContext(); */
 
 class WordsStore extends React.Component {
+    @observable words = []
+    /*  @observable isLoading: false;
+     @errors: null; */
     constructor(props) {
         super(props);
-        makeautoObservable(this)
+        /* makeautoObservable(this) */
         this.state = {
             words: [],
             isLoading: false,
