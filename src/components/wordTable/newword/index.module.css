@@ -1,0 +1,10 @@
+.btnAction {
+    margin-top:5px;
+}
+.error_input{
+    border: 1px solid crimson;
+}
+.textError{
+    color:crimson;
+    font-size: 0.8em;
+}

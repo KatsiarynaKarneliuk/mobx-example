@@ -1,0 +1,17 @@
+html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+.flashcards{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-rows: auto; 
+    width:100vw;
+    padding-left: 15px;
+}
+.countBtn{
+   padding-top:20px;
+}

@@ -1,0 +1,17 @@
+.wraper{
+    display: flex;   
+    justify-content: center;
+    width: 100vw;
+    
+    
+   
+}
+.notf{ 
+    display: flex;
+    margin-top:10rem;
+    align-items: center;
+    height: 50vh;
+    box-shadow:  8px 8px 8px 2px rgb(209, 221, 240);
+    
+
+}
