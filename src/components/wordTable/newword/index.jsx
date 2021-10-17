@@ -56,23 +56,20 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                 Добавить слово
             </Button>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle>Добавить новое слово</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Введите слово, транскрипцию и перевод
                     </DialogContentText>
                     <TextField name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english}
-                        autoFocus
                         margin="dense"
                         id="name"
                         label="english"
                         type="text"
                         fullWidth
                         variant="standard"
-
                     />
                     <TextField name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription}
-                        autoFocus
                         margin="dense"
                         id="name"
                         label="transcription"
@@ -81,7 +78,6 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                         variant="standard"
                     />
                     <TextField name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian}
-                        autoFocus
                         margin="dense"
                         id="name"
                         label="russian"
@@ -91,11 +87,12 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    {/* <Button onClick={handleClose}>Cancel</Button> */}
                     <Button onClick={handleSave} disabled={isSaveDisabled}>Save</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </div >
     );
 }));
 

@@ -10,7 +10,7 @@ class WordsStore {
     }
 
     @action fetchData = () => {
-        this.isLoading = true;
+        /* if (this.isLoading && !fetch) { */
         return fetch('/api/words')
             .then(response => {
                 if (response.ok) {
@@ -23,7 +23,7 @@ class WordsStore {
                 this.words = response,
                 this.isLoading = false,
             )
-        /* .then(() => this.isLoading = false) */
+        /* } */
     }
     @action deleteWord = (id) => {
         this.isLoading = true
@@ -41,10 +41,9 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
-        /* .then(() => this.isLoading = false) */
     }
     @action updateWord = (id, value) => {
-        this.isLoading(true)
+        this.isLoading = true
         return fetch(`/api/words/${id}/update`, {
             method: 'POST',
             headers: {
@@ -64,11 +63,10 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
-        /* .then(() => this.isLoading = false) */
-
+            .then(this.isLoading = false)
     }
     @action addWord = (value) => {
-        this.isLoading(true)
+        this.isLoading = true
         return fetch('/api/words/add', {
             method: 'POST',
             headers: {
@@ -89,7 +87,7 @@ class WordsStore {
                 }
             })
 
-        /* .then(() => this.isLoading = false) */
+            .then(this.isLoading = false)
     }
 }
 

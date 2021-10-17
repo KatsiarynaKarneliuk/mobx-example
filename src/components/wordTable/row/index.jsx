@@ -9,12 +9,14 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
     const isLoading = wordsStore.isLoading
+    const { english, russian, transcription, id } = wordsStore.words
+
 
     const [value, setValue] = useState({
-        english: english,
-        russian: russian,
-        transcription: transcription,
-        id: id
+        english: wordsStore.english,
+        russian: wordsStore.russian,
+        transcription: wordsStore.transcription,
+        id: wordsStore.id
     });
     const [errors, setErrors] = useState({
         english: false,
@@ -41,9 +43,9 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            setIsLoading(isLoading)
+            isLoading(true)
             wordsStore.updateWord()
-            setIsLoading(false)
+            isLoading(false)
             setEditable(false)
         }
     }

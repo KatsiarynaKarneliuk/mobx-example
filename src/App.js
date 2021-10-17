@@ -8,8 +8,6 @@ import Slider from './components/game';
 import PageNotFound from './components/notFound';
 import photoshop from './components/images/photoshop.png';
 
-
-
 export default function Nav() {
     const routes = ["/", "/flashcards", "/game"]
     return (  
