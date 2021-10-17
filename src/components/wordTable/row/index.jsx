@@ -26,7 +26,7 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const isSaveDisabled = Object.values(errors).some(el => el);
     const handleEdit = () => {
         setEditable(true);
-        wordsStore.editWord()
+        wordsStore.updateWord()
     }
     const handleCancel = () => {
         setEditable(false);

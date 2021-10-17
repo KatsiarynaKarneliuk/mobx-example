@@ -27,7 +27,6 @@ class WordsStore {
     }
     @action deleteWord = (id) => {
         this.isLoading = true
-        this.isDisabledDelete(true)
         return fetch(`/api/words/${id}/delete`, {
             method: 'POST',
             headers: {
@@ -41,6 +40,7 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
+            .then(this.isLoading = false)
     }
     @action updateWord = (id, value) => {
         this.isLoading = true
