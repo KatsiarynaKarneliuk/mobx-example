@@ -9,14 +9,14 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
     const isLoading = wordsStore.isLoading
-    const { english, russian, transcription, id } = wordsStore.words
-
+    const { english, russian, transcription, id } = wordsStore.words /*так видимо, нельзя?*/
+    console.log('nh', wordsStore.words)
 
     const [value, setValue] = useState({
-        english: wordsStore.english,
-        russian: wordsStore.russian,
-        transcription: wordsStore.transcription,
-        id: wordsStore.id
+        english: english,
+        russian: russian,
+        transcription: transcription,
+        id: id
     });
     const [errors, setErrors] = useState({
         english: false,
@@ -26,16 +26,18 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const isSaveDisabled = Object.values(errors).some(el => el);
     const handleEdit = () => {
         setEditable(true);
-        wordsStore.updateWord()
     }
     const handleCancel = () => {
         setEditable(false);
+    }
+    const handleDelete = (id) => {
+        setIsDisabledDelete(true)
+        wordsStore.deleteWord()
     }
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
     }
-
     const handleSave = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
@@ -49,11 +51,6 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
             setEditable(false)
         }
     }
-    const handleDelete = (id) => {
-        setIsDisabledDelete(true)
-        wordsStore.deleteWord()
-    }
-
     return (
         <React.Fragment>
             {editable

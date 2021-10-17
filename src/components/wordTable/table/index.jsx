@@ -9,7 +9,7 @@ import { observer, inject } from "mobx-react";
 const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     useEffect(() => {
         wordsStore.fetchData()
-    }, [])
+    }, [wordsStore])   /*можно ли так?*/
     const listWords = wordsStore.words
     console.log('listwords', listWords)
     const isLoading = wordsStore.isLoading
