@@ -97,29 +97,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
             </Dialog>
         </div>
     );
-}
-
-
-/* return (
-    <tr>
-        <td>
-            <input name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english} />
-            <div className={styles.textError}>{errors.english && errors.english}</div>
-        </td>
-        <td>
-            <input name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription} />
-            <div >{errors.transcription && errors.transcription}</div>
-        </td>
-        <td>
-            <input name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian} />
-            <div>{errors.russian && errors.russian} </div>
-        </td>
-        <td>
-            <BtnAction className={styles.btnAction} btnName="saveNewWord" onClick={handleSave} disabled={isSaveDisabled} />
-        </td>
-    </tr>
-)
-} */
+}));
 
 export default AddNewWord;
 

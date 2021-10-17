@@ -10,7 +10,6 @@ const stores = {
 
 ReactDOM.render(
   <Provider {...stores}>   
-    {/* <Words /> */}
     <App />
   </Provider>,
   document.getElementById('root')

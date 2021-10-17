@@ -1,4 +1,4 @@
-import { React, /* useState, */ } from 'react';
+import { React, useEffect } from 'react';
 import styles from './index.module.css';
 import Row from '../row';
 import LoadedComponent from '../../isLoading';
@@ -11,7 +11,8 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     useEffect(() => {
         wordsStore.fetchData()
     }, [])
-    const listWords = wordsStore.words
+    const listWords = wordsStore.words()
+    console.log(listWords)
     const isLoading = wordsStore.isLoading
     const error = wordsStore.error
 
@@ -20,7 +21,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
             <div className={styles.wraper}>
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
-                    <AddNewWord refreshData={refreshData}></AddNewWord>
+                    <AddNewWord></AddNewWord>
                     <thead className={styles.thead}>
                         <tr className={styles.tr}>
                             <td>english</td>
@@ -45,6 +46,6 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
             </div>
         </LoadedComponent >
     )
-}
+}));
 export default Table;
 

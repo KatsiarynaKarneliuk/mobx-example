@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardWrapper from '../flashcards/cardWrapper';
 import styles from './index.module.css';
 import { observer, inject } from "mobx-react";
@@ -10,7 +10,7 @@ const Slider = inject(['wordsStore'])(observer(({ wordsStore }) => {
     useEffect(() => {
         wordsStore.fetchData()
     }, [])
-    const listWords = wordStore.words
+    const listWords = wordsStore.words
     const [position, setPosition] = useState(0);
 
     const showPreviousHandler = () => {
@@ -40,5 +40,5 @@ const Slider = inject(['wordsStore'])(observer(({ wordsStore }) => {
             />
         </div>
     )
-}
+}));
 export default Slider;

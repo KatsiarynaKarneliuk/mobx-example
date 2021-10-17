@@ -1,4 +1,4 @@
-import { React, useState/* , useContext */ } from 'react';
+import { React, useState, useEffect } from 'react';
 import Flashcard from '../сard';
 import styles from './index.module.css';
 import Button from '@mui/material/Button';
@@ -32,6 +32,6 @@ const Flashcards = inject(['wordsStore'])(observer(({ wordsStore }) => {
             </div>
         </div >
     )
-}
+}));
 
 export default Flashcards;

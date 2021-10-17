@@ -86,5 +86,5 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
             }
         </React.Fragment>
     )
-}
+}));
 export default Row;

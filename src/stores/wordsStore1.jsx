@@ -1,15 +1,11 @@
-import React from 'react';
 import { action, makeAutoObservable } from 'mobx';
 
-class WordsStore extends React.Component {
+class WordsStore {
     words = []
     error = null
     isLoading = false
-    id = null
-    value = " "
 
     constructor(props) {
-        super(props);
         makeAutoObservable(this)
     }
 
@@ -24,15 +20,13 @@ class WordsStore extends React.Component {
                 }
             })
             .then((response) =>
-                this.setState({
-                    words: response,
-                    isLoading: false,
-                })
+                this.words = response,
+                this.isLoading = false,
             )
-            .catch(error => this.setState({ error: error, isLoading: false }));
+        /* .then(() => this.isLoading = false) */
     }
     @action deleteWord = (id) => {
-        this.isLoading(true)
+        this.isLoading = true
         this.isDisabledDelete(true)
         return fetch(`/api/words/${id}/delete`, {
             method: 'POST',
@@ -47,9 +41,9 @@ class WordsStore extends React.Component {
                     throw new Error('Something went wrong')
                 }
             })
-            .then(() => this.setState({ isLoading: false, isDisabledDelete: false }))
+        /* .then(() => this.isLoading = false) */
     }
-    @action updateWord = () => {
+    @action updateWord = (id, value) => {
         this.isLoading(true)
         return fetch(`/api/words/${id}/update`, {
             method: 'POST',
@@ -70,10 +64,10 @@ class WordsStore extends React.Component {
                     throw new Error('Something went wrong')
                 }
             })
-            .then(() => this.setState({ isLoading: false, isEditable: false }))
+        /* .then(() => this.isLoading = false) */
 
     }
-    @action addWord = () => {
+    @action addWord = (value) => {
         this.isLoading(true)
         return fetch('/api/words/add', {
             method: 'POST',
@@ -95,7 +89,7 @@ class WordsStore extends React.Component {
                 }
             })
 
-            .then(() => this.setState({ isLoading: false })
+        /* .then(() => this.isLoading = false) */
     }
 }
 
