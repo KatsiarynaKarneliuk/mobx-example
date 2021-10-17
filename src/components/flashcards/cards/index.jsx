@@ -6,8 +6,9 @@ import { observer, inject } from "mobx-react";
 
 
 const Flashcards = inject(['wordsStore'])(observer(({ wordsStore }) => {
-    /* const context = useContext(Context); */
-    /* const listWords = context.words */
+    useEffect(() => {
+        wordsStore.fetchData()
+    }, [])
     const listWords = wordsStore.words
 
     const [amountOfChecked, setAmountOfChecked] = useState(0);

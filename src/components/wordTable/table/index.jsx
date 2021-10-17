@@ -1,18 +1,20 @@
-import { React, /* useState, */ useContext } from 'react';
+import { React, /* useState, */ } from 'react';
 import styles from './index.module.css';
 import Row from '../row';
-import { Context } from '../../../gotWords';
 import LoadedComponent from '../../isLoading';
 import AddNewWord from '../newword';
+import { observer, inject } from "mobx-react";
 
 
-function Table({ isLoading, error }) {
-    const context = useContext(Context);
-    console.log(context)
-    const listWords = context.words
-    console.log(listWords)
-    const refreshData = context.loadData
-    console.log(refreshData)
+
+const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
+    useEffect(() => {
+        wordsStore.fetchData()
+    }, [])
+    const listWords = wordsStore.words
+    const isLoading = wordsStore.isLoading
+    const error = wordsStore.error
+
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>

@@ -20,11 +20,11 @@ class WordsStore extends React.Component {
             errors: null,
         }
     }
-    @action componentDidMount() {
+    componentDidMount() {
         this.setState({ isLoading: true }); //включаем индикатор
         this.loadData()
     }
-    loadData = () => {
+    @action loadData = () => {
         fetch('/api/words')
             .then(response => {
                 if (response.ok) {

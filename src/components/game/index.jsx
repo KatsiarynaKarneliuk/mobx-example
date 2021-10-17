@@ -1,13 +1,16 @@
 import React, { useState, useContext } from 'react';
 import CardWrapper from '../flashcards/cardWrapper';
 import styles from './index.module.css';
-import { Context } from '../../gotWords';
+import { observer, inject } from "mobx-react";
 
 
 
-const Slider = () => {
-    const context = useContext(Context);
-    const listWords = context.words
+
+const Slider = inject(['wordsStore'])(observer(({ wordsStore }) => {
+    useEffect(() => {
+        wordsStore.fetchData()
+    }, [])
+    const listWords = wordStore.words
     const [position, setPosition] = useState(0);
 
     const showPreviousHandler = () => {
@@ -15,7 +18,6 @@ const Slider = () => {
             setPosition(position - 1);
         }
     };
-
     const showNextHandler = () => {
         if (position < listWords.length - 1) {
             setPosition(position + 1);

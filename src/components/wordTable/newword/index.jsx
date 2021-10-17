@@ -1,4 +1,4 @@
-import { React, useState/* , useContext */ } from 'react'
+import { React, useState } from 'react'
 /* import BtnAction from '../btnAction'; */
 import styles from './index.module.css';
 import Button from '@mui/material/Button';
@@ -19,62 +19,33 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         russian: '',
         transcription: '',
     });
-    /* const context = useContext(Context); */
-    const [errors, setErrors] = useState({   /* чтобы перебрать значения свойств О,надо получить доступ к массиву его значений */
+    const [errors, setErrors] = useState({
         english: false,
         russian: false,
         transcription: false
     })
     const isSaveDisabled = Object.values(errors).some(el => el);
-    const [isLoading, setIsLoading] = useState(false)
+
 
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
     }
+
     const handleSave = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
         }
-
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            setIsLoading(isLoading)
-            fetch('/api/words/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({
-                    english: value.english,
-                    russian: value.russian,
-                    transcription: value.transcription,
-                    tags: []
-                })
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong')
-                    }
-                })
-
-                .then(setIsLoading(false), /* context */wordsStore.loadData()/* () => refreshData() */)
-                .then(setValue({
-                    english: '',
-                    russian: '',
-                    transcription: '',
-                }))
+            wordsStore.addWord()
         }
     }
     const [open, setOpen] = useState(false);
-
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
     };

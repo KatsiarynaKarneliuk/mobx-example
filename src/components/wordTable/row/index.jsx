@@ -1,15 +1,14 @@
-import React, { useState/* , useContext  */ } from 'react';
+import React, { useState } from 'react';
 import BtnAction from '../btnAction';
 import styles from './index.module.css';
 import { observer, inject } from "mobx-react";
 
 
-const Row = inject(['wordsStore'])(observer(({ wordsStore })/* ({ english, russian, transcription, id }) */ => {
+const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
 
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    /* const context = useContext(Context); */
+    const isLoading = wordsStore.isLoading
 
     const [value, setValue] = useState({
         english: english,
@@ -17,14 +16,18 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore })/* ({ english, russi
         transcription: transcription,
         id: id
     });
-
-    const [errors, setErrors] = useState({   /* чтобы перебрать значения свойств О,надо получить доступ к массиву его значений */
+    const [errors, setErrors] = useState({
         english: false,
         russian: false,
         transcription: false
     })
+    const isSaveDisabled = Object.values(errors).some(el => el);
     const handleEdit = () => {
         setEditable(true);
+        wordsStore.editWord()
+    }
+    const handleCancel = () => {
+        setEditable(false);
     }
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -38,55 +41,17 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore })/* ({ english, russi
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-
             setIsLoading(isLoading)
-            fetch(`/api/words/${id}/update`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({
-                    english: value.english,
-                    russian: value.russian,
-                    transcription: value.transcription,
-                    tags: []
-                })
-            })
-                .then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong')
-                    }
-                })
-                .then(setIsLoading(false), setEditable(false), wordsStore/*context*/.loadData());
-
+            wordsStore.updateWord()
+            setIsLoading(false)
+            setEditable(false)
         }
     }
-
-    const isSaveDisabled = Object.values(errors).some(el => el); //как добавить, что также disabled при отправке запроса?
-    const handleCancel = () => {
-        setEditable(false);
-    }
-
     const handleDelete = (id) => {
-        setIsLoading(true)
         setIsDisabledDelete(true)
-        fetch(`/api/words/${id}/delete`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            }
-        })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong')
-                }
-            })
-            .then(setIsLoading(false), setIsDisabledDelete(false), wordsStore/*context*/.loadData());
+        wordsStore.deleteWord()
     }
+
     return (
         <React.Fragment>
             {editable
