@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* import Words from './context'; */
 import { Provider } from 'mobx-react';
-import WordsStore from './stores/wordsStore.jsx';
+import WordsStore from './stores/wordsStore1.jsx';
 import App from './App';
 
 const stores = {
