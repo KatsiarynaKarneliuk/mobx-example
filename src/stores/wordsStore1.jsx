@@ -1,4 +1,4 @@
-import { action, makeObservable } from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 
 class WordsStore {
     words = [];
@@ -7,7 +7,7 @@ class WordsStore {
     isLoaded = false;
 
     constructor() {
-        makeObservable(this)
+        makeAutoObservable(this)
     }
     @action fetchData = () => {
         if (this.isLoaded && this.isLoading) {
@@ -37,7 +37,7 @@ class WordsStore {
 
     }
     @action deleteWord = (id) => {
-        this.isLoading = true
+        this.isLoading = true;
         return fetch(`/api/words/${id}/delete`, {
             method: 'POST',
             headers: {
@@ -57,7 +57,7 @@ class WordsStore {
             });
     }
     @action updateWord = (id, value) => {
-        this.isLoading = true
+        this.isLoading = true;
         const updatedWord = {
             english: value.english,
             russian: value.russian,
