@@ -7,18 +7,19 @@ import { observer, inject } from "mobx-react";
 
 
 const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
-    useEffect(() => {
-        wordsStore.fetchData()
-    }, [wordsStore])   /*можно ли так?*/
     const listWords = wordsStore.words
     console.log('listwords', listWords)
     const isLoading = wordsStore.isLoading
     const error = wordsStore.error
 
+    useEffect(() => {
+        wordsStore.fetchData();
+    }, []);
+
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
-                <AddNewWord></AddNewWord>
+                <AddNewWord />
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
                     <thead className={styles.thead}>

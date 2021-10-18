@@ -1,16 +1,20 @@
-import { action, makeAutoObservable } from 'mobx';
+import { action, makeObservable } from 'mobx';
 
 class WordsStore {
-    words = []
-    error = null
-    isLoading = false
+    words = [];
+    error = null;
+    isLoading = false;
+    isLoaded = false;
 
-    constructor(props) {
-        makeAutoObservable(this)
+    constructor() {
+        makeObservable(this)
     }
-
     @action fetchData = () => {
-        /* if (this.isLoading && !fetch) { */
+        if (this.isLoaded && this.isLoading) {
+            return;
+        }
+        this.isLoading = true;
+        this.isLoaded = false;
         return fetch('/api/words')
             .then(response => {
                 if (response.ok) {
@@ -19,11 +23,18 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
-            .then((response) =>
-                this.words = response,
-                this.isLoading = false,
-            )
-        /* } */
+            .then((response) => {
+                this.words = response;
+                this.isLoading = false;
+                this.isLoaded = true;
+
+            })
+            .catch(error => {
+                this.error = error;
+                this.isLoading = false;
+                this.isLoaded = true;
+            });
+
     }
     @action deleteWord = (id) => {
         this.isLoading = true
@@ -40,22 +51,29 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
-            .then(this.isLoading = false)
+            .catch(error => {
+                this.error = error;
+                this.isLoading = false;
+            });
     }
     @action updateWord = (id, value) => {
         this.isLoading = true
+        const updatedWord = {
+            english: value.english,
+            russian: value.russian,
+            transcription: value.transcription,
+            tags: []
+        }
         return fetch(`/api/words/${id}/update`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({
-                english: value.english,
-                russian: value.russian,
-                transcription: value.transcription,
-                tags: []
-            })
+            body: JSON.stringify(updatedWord)
         })
+            .then(() => {
+                this.words.push(updatedWord);
+            })
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -63,21 +81,26 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
-            .then(this.isLoading = false)
+            .catch(error => {
+                this.error = error;
+                this.isLoading = false;
+            });
     }
     @action addWord = (value) => {
-        this.isLoading = true
+        this.isLoading = true;
+
+        const newWord = {
+            english: value.english,
+            russian: value.russian,
+            transcription: value.transcription,
+            tags: []
+        };
         return fetch('/api/words/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({
-                english: value.english,
-                russian: value.russian,
-                transcription: value.transcription,
-                tags: []
-            })
+            body: JSON.stringify(newWord)
         })
             .then((response) => {
                 if (response.ok) {
@@ -86,8 +109,14 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
-
-            .then(this.isLoading = false)
+            .then(() => {
+                this.words.push(newWord);
+                this.isLoading = false;
+            })
+            .catch(error => {
+                this.error = error;
+                this.isLoading = false;
+            });
     }
 }
 

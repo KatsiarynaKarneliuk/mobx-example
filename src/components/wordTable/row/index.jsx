@@ -8,9 +8,9 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
 
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
-    const isLoading = wordsStore.isLoading
-    const { english, russian, transcription, id } = wordsStore.words /*так видимо, нельзя?*/
+    const { english, russian, transcription, id } = wordsStore.words
     console.log('nh', wordsStore.words)
+    console.log(typeof wordsStore.words)
 
     const [value, setValue] = useState({
         english: english,
@@ -32,22 +32,20 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }
     const handleDelete = (id) => {
         setIsDisabledDelete(true)
-        wordsStore.deleteWord()
+        wordsStore.deleteWord(id)
     }
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
     }
-    const handleSave = () => {
+    const handleSave = (id) => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
         }
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            isLoading(true)
-            wordsStore.updateWord()
-            isLoading(false)
+            wordsStore.updateWord(id)
             setEditable(false)
         }
     }

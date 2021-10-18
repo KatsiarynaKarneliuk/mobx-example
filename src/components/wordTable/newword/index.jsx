@@ -11,8 +11,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { observer, inject } from "mobx-react";
 
 
-
-
 const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const [value, setValue] = useState({
         english: '',
@@ -39,7 +37,13 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            wordsStore.addWord()
+            wordsStore.addWord(value)
+            setValue({
+                english: '',
+                russian: '',
+                transcription: '',
+            })
+            handleClose()
         }
     }
     const [open, setOpen] = useState(false);
@@ -87,7 +91,6 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    {/* <Button onClick={handleClose}>Cancel</Button> */}
                     <Button onClick={handleSave} disabled={isSaveDisabled}>Save</Button>
                     <Button onClick={handleClose}>Cancel</Button>
                 </DialogActions>
