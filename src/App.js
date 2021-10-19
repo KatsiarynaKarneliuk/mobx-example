@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './App.css'; 
+import styles from './App.module.css'; 
 import { Tabs, Tab, AppBar, Toolbar } from "@material-ui/core";
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import Table from './components/wordTable/table';

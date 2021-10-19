@@ -24,7 +24,7 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
     const handleCancel = () => {
         setEditable(false);
     }
-    const handleDelete = (id) => {
+    const handleDelete = () => {
         setIsDisabledDelete(true)
         deleteWord(id)
     }
@@ -32,7 +32,7 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
     }
-    const handleSave = (id) => {
+    const handleSave = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
         }
