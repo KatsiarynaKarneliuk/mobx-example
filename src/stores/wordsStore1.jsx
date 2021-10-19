@@ -51,6 +51,10 @@ class WordsStore {
                     throw new Error('Something went wrong')
                 }
             })
+            .then(() => {
+                this.words = this.words.filter(item => item.id !== id)
+                this.isLoading = false;
+            })
             .catch(error => {
                 this.error = error;
                 this.isLoading = false;
@@ -79,6 +83,11 @@ class WordsStore {
                 } else {
                     throw new Error('Something went wrong')
                 }
+            })
+            .then(() => {
+                const index = this.words.findIndex(item => item.id === id)
+                this.words[index] = updatedWord;
+                this.isLoading = false;
             })
             .catch(error => {
                 this.error = error;

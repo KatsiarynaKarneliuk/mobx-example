@@ -40,7 +40,7 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            updateWord(id)
+            updateWord(id, value)
             setEditable(false)
         }
     }

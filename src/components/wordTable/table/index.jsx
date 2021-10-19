@@ -15,6 +15,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const deleteWord = wordsStore.deleteWord
     const updateWord = wordsStore.updateWord
 
+
     useEffect(() => {
         wordsStore.fetchData();
     }, []);
@@ -43,6 +44,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                                 russian={word.russian}
                                 updateWord={updateWord}
                                 deleteWord={deleteWord}
+
                             />
                         )}
                     </tbody>
