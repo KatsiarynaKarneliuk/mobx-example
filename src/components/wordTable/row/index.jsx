@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import BtnAction from '../btnAction';
 import styles from './index.module.css';
 
+
 const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) => {
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
@@ -24,7 +25,7 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
     const handleCancel = () => {
         setEditable(false);
     }
-    const handleDelete = () => {
+    const handleDelete = (id) => {
         setIsDisabledDelete(true)
         deleteWord(id)
     }

@@ -59,6 +59,7 @@ class WordsStore {
     @action updateWord = (id, value) => {
         this.isLoading = true;
         const updatedWord = {
+            id: id,
             english: value.english,
             russian: value.russian,
             transcription: value.transcription,
@@ -71,9 +72,7 @@ class WordsStore {
             },
             body: JSON.stringify(updatedWord)
         })
-            .then(() => {
-                this.words.push(updatedWord);
-            })
+
             .then((response) => {
                 if (response.ok) {
                     return response.json();
