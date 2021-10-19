@@ -11,6 +11,9 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     console.log('listwords', listWords)
     const isLoading = wordsStore.isLoading
     const error = wordsStore.error
+    const fetchData = wordsStore.fetchData
+    const deleteWord = wordsStore.deleteWord
+    const updateWord = wordsStore.updateWord
 
     useEffect(() => {
         wordsStore.fetchData();
@@ -19,7 +22,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
-                <AddNewWord />
+                <AddNewWord handleSave={fetchData} />
                 <table className={styles.table}>
                     <caption><h1>Слова для изучения</h1></caption>
                     <thead className={styles.thead}>
@@ -38,7 +41,8 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                                 english={word.english}
                                 transcription={word.transcription}
                                 russian={word.russian}
-                                refreshData={word.refreshData}
+                                updateWord={word.updateWord}
+                                deleteWord={word.deleteWord}
                             />
                         )}
                     </tbody>

@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import BtnAction from '../btnAction';
 import styles from './index.module.css';
-import { observer, inject } from "mobx-react";
 
-
-const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
-
+const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) => {
     const [editable, setEditable] = useState(false);
     const [isDisabledDelete, setIsDisabledDelete] = useState(false)
-    const { english, russian, transcription, id } = wordsStore.words
-    console.log('nh', wordsStore.words)
-    console.log(typeof wordsStore.words)
 
     const [value, setValue] = useState({
         english: english,
@@ -32,7 +26,7 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }
     const handleDelete = (id) => {
         setIsDisabledDelete(true)
-        wordsStore.deleteWord(id)
+        deleteWord(id)
     }
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -45,7 +39,7 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
-            wordsStore.updateWord(id)
+            updateWord(id)
             setEditable(false)
         }
     }
@@ -83,5 +77,5 @@ const Row = inject(['wordsStore'])(observer(({ wordsStore }) => {
             }
         </React.Fragment>
     )
-}));
+}
 export default Row;
