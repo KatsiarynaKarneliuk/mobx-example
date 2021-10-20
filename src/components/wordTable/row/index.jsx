@@ -5,7 +5,8 @@ import styles from './index.module.css';
 
 const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) => {
     const [editable, setEditable] = useState(false);
-    const [isDisabledDelete, setIsDisabledDelete] = useState(false)
+    const [isDisabledDelete, setIsDisabledDelete] = useState(false);
+    const [isSaveDisabled, setSaveDisabled] = useState(false);
 
     const [value, setValue] = useState({
         english: english,
@@ -18,7 +19,7 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
         russian: false,
         transcription: false
     })
-    const isSaveDisabled = Object.values(errors).some(el => el);
+    /* const isSaveDisabled = Object.values(errors).some(el => el); */
     const handleEdit = () => {
         setEditable(true);
     }
@@ -40,8 +41,12 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
+            setSaveDisabled(true)
             updateWord(id, value)
-            setEditable(false)
+                .then(() => {
+                    setSaveDisabled(false)
+                    setEditable(false)
+                })
         }
     }
     return (

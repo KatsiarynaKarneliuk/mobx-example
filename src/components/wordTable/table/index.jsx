@@ -21,7 +21,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }, []);
 
     return (
-        <LoadedComponent isLoading={isLoading} error={error}>
+        <LoadedComponent isLoading={isLoading} error={error} /* words={listWords} */>
             <div className={styles.wraper}>
                 <AddNewWord fetchData={fetchData} />
                 <table className={styles.table}>
