@@ -5,8 +5,6 @@ import Button from '@mui/material/Button';
 
 
 const CardWrapper = ({ position, onShowPrevious, onShowNext, listWords, number, dataLength }) => {
-
-
     return (
         <div className={styles.cardWrapper}>
             <div className={styles.aroundCard}>

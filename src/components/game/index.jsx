@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import CardWrapper from '../flashcards/cardWrapper';
 import styles from './index.module.css';
+import LoadedComponent from './../isLoading';
 import { observer, inject } from "mobx-react";
 
 const Slider = inject(['wordsStore'])(observer(({ wordsStore }) => {
+    const listWords = wordsStore.words;
+    const isLoading = wordsStore.isLoading
+    const error = wordsStore.error
+
     useEffect(() => {
-        wordsStore.fetchData()
-    }, [])
-    const listWords = wordsStore.words
+        wordsStore.fetchData();
+    }, []);
     const [position, setPosition] = useState(0);
     const showPreviousHandler = () => {
         if (position > 0) {
@@ -25,16 +29,18 @@ const Slider = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }
 
     return (
-        <div className={styles.slider}>
-            <CardWrapper
-                onShowPrevious={showPreviousHandler}
-                onShowNext={showNextHandler}
-                number={position + 1}
-                position={position}
-                listWords={listWords}
-                dataLength={listWords.length}
-            />
-        </div>
+        <LoadedComponent isLoading={isLoading} error={error}>
+            <div className={styles.slider}>
+                <CardWrapper
+                    onShowPrevious={showPreviousHandler}
+                    onShowNext={showNextHandler}
+                    number={position + 1}
+                    position={position}
+                    listWords={listWords}
+                    dataLength={listWords.length}
+                />
+            </div>
+        </LoadedComponent >
     )
 }));
 export default Slider;

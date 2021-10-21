@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const LoadedComponent = ({ /* words, */ isLoading, error, children }) => {
+const LoadedComponent = ({/*  words, */ isLoading, error, children }) => {
     if (isLoading /* && words.length === 0 */) {
         return <p>Loading ...</p>
     }

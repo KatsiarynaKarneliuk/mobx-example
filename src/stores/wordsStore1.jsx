@@ -37,7 +37,6 @@ class WordsStore {
 
     }
     @action deleteWord = (id) => {
-        /* this.isLoading = true; */
         return fetch(`/api/words/${id}/delete`, {
             method: 'POST',
             headers: {
@@ -53,15 +52,12 @@ class WordsStore {
             })
             .then(() => {
                 this.words = this.words.filter(item => item.id !== id)
-                /* this.isLoading = false; */
             })
             .catch(error => {
                 this.error = error;
-                /* this.isLoading = false; */
             });
     }
     @action updateWord = (id, value) => {
-        /* this.isLoading = true; */
         const updatedWord = {
             id: id,
             english: value.english,
@@ -87,16 +83,12 @@ class WordsStore {
             .then(() => {
                 const index = this.words.findIndex(item => item.id === id)
                 this.words[index] = updatedWord;
-                /* this.isLoading = false; */
             })
             .catch(error => {
                 this.error = error;
-                /* this.isLoading = false; */
             });
     }
     @action addWord = (value) => {
-        /* this.isLoading = true; */
-
         const newWord = {
             english: value.english,
             russian: value.russian,
@@ -119,11 +111,9 @@ class WordsStore {
             })
             .then(() => {
                 this.words.push(newWord);
-                /* this.isLoading = false; */
             })
             .catch(error => {
                 this.error = error;
-                /* this.isLoading = false; */
             });
     }
 }
