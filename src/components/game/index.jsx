@@ -31,14 +31,16 @@ const Slider = inject(['wordsStore'])(observer(({ wordsStore }) => {
     return (
         <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.slider}>
-                <CardWrapper
-                    onShowPrevious={showPreviousHandler}
-                    onShowNext={showNextHandler}
-                    number={position + 1}
-                    position={position}
-                    listWords={listWords}
-                    dataLength={listWords.length}
-                />
+                {listWords.length &&
+                    (<CardWrapper
+                        onShowPrevious={showPreviousHandler}
+                        onShowNext={showNextHandler}
+                        number={position + 1}
+                        position={position}
+                        listWords={listWords}
+                        dataLength={listWords.length}
+                    />)
+                }
             </div>
         </LoadedComponent >
     )

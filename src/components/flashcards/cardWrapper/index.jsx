@@ -18,6 +18,7 @@ const CardWrapper = ({ position, onShowPrevious, onShowNext, listWords, number, 
             </div>
             <p>{number} / {dataLength}</p>
         </div>
+
     )
 }
 export default CardWrapper;

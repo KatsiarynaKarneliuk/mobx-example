@@ -1,5 +1,5 @@
 .btnAction {
-    margin-top:5px;
+    margin-top:20px;
 }
 .error_input{
     border: 1px solid crimson;
@@ -7,4 +7,8 @@
 .textError{
     color:crimson;
     font-size: 0.8em;
+}
+.btn{
+    display:flex;
+    justify-content: center;
 }

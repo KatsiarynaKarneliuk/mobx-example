@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BtnAction from '../btnAction';
+import BtnAction from './btnAction';
 import styles from './index.module.css';
 
 
@@ -74,7 +74,7 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
                     <td>{english}</td>
                     <td>{transcription}</td>
                     <td>{russian}</td>
-                    <td>
+                    <td className={styles.btn}>
                         <BtnAction className={styles.btnAction} btnName="edit" onClick={handleEdit} />
                         <BtnAction className={styles.btnAction} btnName="delete" onClick={() => handleDelete(id)} disabled={isDisabledDelete} />
                     </td>

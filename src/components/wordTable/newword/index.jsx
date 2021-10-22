@@ -57,7 +57,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
     return (
         <div>
             <Button variant="outlined" onClick={handleClickOpen}>
-                Добавить слово
+                Чтобы добавить слово нажми здесь
             </Button>
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Добавить новое слово</DialogTitle>
@@ -96,6 +96,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                 </DialogActions>
             </Dialog>
         </div >
+
     );
 }));
 
