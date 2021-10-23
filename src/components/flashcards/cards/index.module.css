@@ -13,5 +13,29 @@ html, body {
     padding-left: 15px;
 }
 .countBtn{
-   padding-top:20px;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin: 30px;  
+    border: 1px solid #fff;
+    border-radius: 10px;
+    height: 46px;
+    width:200px;
+    line-height: 46px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #444;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;  
+    vertical-align: top;
+    transition: box-shadow 0.2s;
+}
+.btns{
+	display:flex;
+    justify-content: center;
 }

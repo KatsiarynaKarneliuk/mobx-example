@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-  }
+}
 body{   
     display: flex;
     width:100vw;
@@ -43,17 +43,48 @@ body{
 .flip{
     transform: rotateY(180deg);
 }
-  
+
 .transcription{
     font-size:1rem;
 }
-.button{
-    font-size:1rem;
-    background-color: #aac9e4;
-    border-width: 0.01rem;
-    border-color: #d1e2f8;
-    border-radius: 0.2rem;
-    right: 10px;
-    bottom:0px;
-    color:white;
+.button,
+.countBtn{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    min-width: 5em;
+    min-height: 2rem;
+    margin: 40px 0px 0px 0px ;   
+    border: 1px solid /* #fff */ #b8bcbe;
+    border-radius: 10px;
+    min-height: 46px;
+    min-width: 150px;
+    line-height: 46px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #444;
+    background-color: /* #fff */ #aac9e4 ;
+    box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;  
+    vertical-align: top;
+    transition: box-shadow 0.2s;
+    }
+.button:focus-visible {
+    border: 1px solid #4c51f9;
+    outline: none;
 }
+.button:hover {
+    transition: all 0.2s;
+    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+.button:active {
+    background-color: #808080;
+}
+

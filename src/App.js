@@ -8,6 +8,7 @@ import Slider from './components/game';
 import PageNotFound from './components/notFound';
 import photoshop from './components/images/photoshop.png';
 
+
 export default function Nav() {
     const routes = ["/", "/flashcards", "/game"]
     return (  
@@ -22,7 +23,6 @@ export default function Nav() {
                                 </Link>
                             </div>
                             <Tabs className={styles.tabs}>
-                                {console.log(history.location.pathname)}
                                 <Tab value={routes[0]} label="Table" component={Link} to={routes[0]} />
                                 <Tab value={routes[1]} label="Flashcards" component={Link} to={routes[1]} />
                                 <Tab value={routes[2]} label="Game"  component={Link} to={routes[2]} />

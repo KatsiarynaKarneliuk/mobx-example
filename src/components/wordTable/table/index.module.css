@@ -1,7 +1,9 @@
 .wraper{
     display: flex;
-    justify-content: center;
-    width:100vw; 
+    flex-direction: column;
+    align-items: center;
+    width:100vw;
+
 }
 .table {
     border-collapse: collapse;
@@ -10,6 +12,7 @@
     min-width: 400px;
     width:90vw; 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    overflow-x: scroll
 
 }
 .thead{
@@ -24,18 +27,68 @@
 
 td{
     padding: 12px 15px;
+
     text-align: center; 
+    
 }
 
 tbody tr {
     border-bottom: 1px solid #dddddd;
+    scroll-behavior: auto;
 }
 
 tbody tr.active-row {
     font-weight: bold;
-    color: #005498;
+    color: #6e7174;
 }
 
 tbody tr {
     border-bottom: 1px solid #dddddd;
+}
+caption{
+    padding:2%;
+    color: rgb(178, 184, 201);
+}
+.btns{
+	display:flex;
+    justify-content: center;
+}
+.countBtn{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    min-width: 5em;
+    min-height: 2rem;
+    margin: 40px 0px 0px 0px ;   
+    border: 1px solid /* #fff */ #b8bcbe;
+    border-radius: 10px;
+    min-height: 46px;
+    min-width: 150px;
+    line-height: 46px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #444;
+    background-color: /* #fff */ #aac9e4 ;
+    box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    touch-action: manipulation;  
+    vertical-align: top;
+    transition: box-shadow 0.2s;
+    }
+.countBtn:focus-visible {
+    border: 1px solid #4c51f9;
+    outline: none;
+}
+.countBtn:hover {
+    transition: all 0.2s;
+    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
+}
+.countBtn:active {
+    background-color: #808080;
 }
