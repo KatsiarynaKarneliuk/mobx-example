@@ -1,9 +1,11 @@
 import React from 'react'
+import Spiner from './spiner'
 
 
 const LoadedComponent = ({/*  words, */ isLoading, error, children }) => {
     if (isLoading /* && words.length === 0 */) {
-        return <p>Loading ...</p>
+        return (<Spiner />);
+
     }
     if (error) {
         return <p>(error.message)</p>;
