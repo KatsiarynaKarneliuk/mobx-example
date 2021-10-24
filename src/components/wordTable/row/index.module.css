@@ -5,14 +5,14 @@ tr{
 td{
 	display:flex;
 	justify-content: center;
-	flex-direction:column;
+/* 	flex-direction:column; */
 	width: 25%;	
 }
 .btnAction {
-	display: inline-block;
-    /* display:flex; 
+	/* display: inline-block; */
+    display:flex; 
     align-items:center;
-    justify-content: center; */
+    justify-content: center;
     min-width: 5em;
     min-height: 2rem;
     margin: 10px;   

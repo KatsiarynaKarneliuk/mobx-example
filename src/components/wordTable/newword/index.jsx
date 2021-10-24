@@ -22,7 +22,8 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         russian: false,
         transcription: false
     })
-    const isSaveDisabled = Object.values(errors).some(el => el);
+    const [isAddDisabled, setAddDisabled] = useState(false);
+    /* const isSaveDisabled = Object.values(errors).some(el => el); */
 
 
     const handleChangeWord = (e) => {
@@ -41,7 +42,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
             transcription: false,
         })
     }
-    const handleSave = () => {
+    const handleAdd = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
         }
@@ -51,12 +52,14 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
             setErrors({ ...errors, russian: "введите слово" })
         }
         else {
+            setAddDisabled(true)
             wordsStore.addWord(value)
             setValue({
                 english: '',
                 russian: '',
                 transcription: '',
             })
+            setAddDisabled(false)
         }
     }
     return (
@@ -75,7 +78,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     <div className={styles.textError}>{errors.russian && errors.russian} </div>
                 </td>
                 <td className={styles.btn}>
-                    <BtnAction className={styles.btnAction} btnName="add" onClick={handleSave} disabled={isSaveDisabled} />
+                    <BtnAction className={styles.btnAction} btnName="add" onClick={handleAdd} disabled={isAddDisabled} />
                     <BtnAction className={styles.btnAction} btnName="cancel" onClick={handleCancel} />
                 </td>
             </tr>
