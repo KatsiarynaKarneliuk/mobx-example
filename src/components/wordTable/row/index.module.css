@@ -1,8 +1,18 @@
-
+tr{
+	display:flex;
+	align-items: center;
+}
+td{
+	display:flex;
+	justify-content: center;
+	flex-direction:column;
+	width: 25%;	
+}
 .btnAction {
-    display:flex;
+	display: inline-block;
+    /* display:flex; 
     align-items:center;
-    justify-content: center;
+    justify-content: center; */
     min-width: 5em;
     min-height: 2rem;
     margin: 10px;   
@@ -44,6 +54,7 @@
     border: 1px solid crimson;
 }
 .textError{
+	padding:5px;
     color:crimson;
     font-size: 0.8em;
 }

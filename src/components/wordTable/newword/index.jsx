@@ -29,11 +29,16 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
     }
-    const handleCancel = () => {
+    const handleCancel = (e) => {
         setValue({
             english: '',
             russian: '',
             transcription: '',
+        });
+        setErrors({
+            english: false,
+            russian: false,
+            transcription: false,
         })
     }
     const handleSave = () => {
@@ -52,61 +57,8 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                 russian: '',
                 transcription: '',
             })
-            /* handleClose()*/
         }
     }
-    /*const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-     
-    return (
-        <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Для того, чтобы добавить слово нажми здесь
-            </Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Добавить новое слово</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Введите слово, транскрипцию и перевод
-                    </DialogContentText>
-                    <TextField name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english}
-                        margin="dense"
-                        id="name"
-                        label="english"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription}
-                        margin="dense"
-                        id="name"
-                        label="transcription"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
-                    <TextField name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian}
-                        margin="dense"
-                        id="name"
-                        label="russian"
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleSave} disabled={isSaveDisabled}>Save</Button>
-                    <Button onClick={handleClose}>Cancel</Button>
-                </DialogActions>
-            </Dialog>
-        </div >
-    );*/
-
     return (
         <div className={styles.newWordRow}>
             <tr>
@@ -116,11 +68,11 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                 </td>
                 <td>
                     <TextField id="standard-basic" label="transcription" variant="standard" name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription} />
-                    <div >{errors.transcription && errors.transcription}</div>
+                    <div className={styles.textError}>{errors.transcription && errors.transcription}</div>
                 </td>
                 <td>
                     <TextField id="standard-basic" label="russian" variant="standard" name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian} />
-                    <div>{errors.russian && errors.russian} </div>
+                    <div className={styles.textError}>{errors.russian && errors.russian} </div>
                 </td>
                 <td className={styles.btn}>
                     <BtnAction className={styles.btnAction} btnName="add" onClick={handleSave} disabled={isSaveDisabled} />

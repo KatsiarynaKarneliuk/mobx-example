@@ -12,8 +12,6 @@
     min-width: 400px;
     width:90vw; 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    overflow-x: scroll
-
 }
 .thead{
     background-color: #aac9e4;
@@ -42,9 +40,6 @@ tbody tr.active-row {
     color: #6e7174;
 }
 
-tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
 caption{
     padding:2%;
     color: rgb(178, 184, 201);
