@@ -29,7 +29,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const nextPage = () => setCurrentPage(prev => prev + 1)
     const prevPage = () => setCurrentPage(prev => prev - 1)
 
-
+    console.log(listWords[1]);
 
     useEffect(() => {
         wordsStore.fetchData();
@@ -64,7 +64,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     </tbody>
                 </table>
                 <div className={styles.btns}>
-                    <button disabled={currentPage === firstRowIndex} className={styles.paginationBtn} onClick={prevPage}>Prev Page</button>
+                    <button disabled={currentPage === listWords[1]} className={styles.paginationBtn} onClick={prevPage}>Prev Page</button>
                     <Pagination
                         perPage={perPage} total={listWords.length} paginate={paginate} currentPage={currentPage}
                     />

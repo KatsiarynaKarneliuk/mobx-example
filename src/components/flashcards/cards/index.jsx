@@ -45,7 +45,7 @@ const Flashcards = inject(['wordsStore'])(observer(({ wordsStore }) => {
             <div className={styles.btns}>
                 <button className={styles.countBtn} onClick={prevPage}>Prev Page</button>
                 <Pagination
-                    perPage={perPage} total={listWords.length} paginate={paginate}
+                    perPage={perPage} total={listWords.length} paginate={paginate} currentPage={currentPage}
                 />
                 <button className={styles.countBtn} onClick={nextPage}>Next Page</button>
             </div>
