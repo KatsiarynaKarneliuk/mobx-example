@@ -20,7 +20,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const [perPage] = useState(5)
     const lastRowIndex = currentPage * perPage
     const firstRowIndex = lastRowIndex - perPage
-    const currentRow = listWords.slice(firstRowIndex, lastRowIndex)
+    const currentPageRows = listWords.slice(firstRowIndex, lastRowIndex)
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -36,7 +36,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }, []);
 
     return (
-        <LoadedComponent isLoading={isLoading} error={error} /* words={listWords} */>
+        <LoadedComponent isLoading={isLoading} error={error}>
             <div className={styles.wraper}>
                 <AddNewWord fetchData={fetchData} />
                 <table className={styles.table}>
@@ -51,7 +51,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     </thead>
 
                     <tbody className={styles.tbody}>
-                        {/* listWords */currentRow.map(word =>
+                        {currentPageRows.map(word =>
                             <Row
                                 id={word.id}
                                 english={word.english}
@@ -64,11 +64,11 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     </tbody>
                 </table>
                 <div className={styles.btns}>
-                    <button className={styles.pagination} onClick={prevPage}>Prev Page</button>
+                    <button disabled={currentPage === firstRowIndex} className={styles.paginationBtn} onClick={prevPage}>Prev Page</button>
                     <Pagination
-                        perPage={perPage} total={listWords.length} paginate={paginate}
+                        perPage={perPage} total={listWords.length} paginate={paginate} currentPage={currentPage}
                     />
-                    <button className={styles.pagination} onClick={nextPage}>Next Page</button>
+                    <button disabled={Math.ceil(listWords.length / perPage) === currentPage} className={styles.paginationBtn} onClick={nextPage}>Next Page</button>
                 </div>
             </div>
         </LoadedComponent >

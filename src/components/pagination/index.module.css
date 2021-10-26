@@ -1,8 +1,14 @@
-.pageItem{
-	display:inline-block;
+
+.paginationList{
 	margin: 50px 10px 0 10px;
-}
-a{
-	color:#a5a5ad;
+	list-style:none;
 }
 
+.selectedPage{
+	color:#1667e0;
+}
+li{
+	display:inline-block;
+	margin: 0px 10px 0 10px;
+	color:#85888b;
+}
