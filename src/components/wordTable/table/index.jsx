@@ -43,10 +43,10 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     <caption><h1>Слова для изучения</h1></caption>
                     <thead className={styles.thead}>
                         <tr className={styles.tr}>
-                            <td>english</td>
-                            <td>transcription</td>
-                            <td>russian</td>
-                            <td>Action</td>
+                            <td className={styles.word}>english</td>
+                            <td className={styles.word}>transcription</td>
+                            <td className={styles.word}>russian</td>
+                            <td className={styles.word}>Action</td>
                         </tr>
                     </thead>
 
@@ -64,11 +64,11 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     </tbody>
                 </table>
                 <div className={styles.btns}>
-                    <button className={styles.countBtn} onClick={prevPage}>Prev Page</button>
+                    <button className={styles.pagination} onClick={prevPage}>Prev Page</button>
                     <Pagination
                         perPage={perPage} total={listWords.length} paginate={paginate}
                     />
-                    <button className={styles.countBtn} onClick={nextPage}>Next Page</button>
+                    <button className={styles.pagination} onClick={nextPage}>Next Page</button>
                 </div>
             </div>
         </LoadedComponent >

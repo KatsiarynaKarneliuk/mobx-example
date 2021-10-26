@@ -1,11 +1,6 @@
 import { React, useState } from 'react'
 import styles from './index.module.css';
 import TextField from '@mui/material/TextField';
-/*import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';*/
 import { observer, inject } from "mobx-react";
 import BtnAction from './btnAction';
 
@@ -23,8 +18,6 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         transcription: false
     })
     const [isAddDisabled, setAddDisabled] = useState(false);
-    /* const isSaveDisabled = Object.values(errors).some(el => el); */
-
 
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
@@ -64,16 +57,16 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }
     return (
         <div className={styles.newWordRow}>
-            <tr>
-                <td>
+            <tr className={styles.tr}>
+                <td className={styles.word}>
                     <TextField id="standard-basic" label="english" variant="standard" name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english} />
                     <div className={styles.textError}>{errors.english && errors.english}</div>
                 </td>
-                <td>
+                <td className={styles.word}>
                     <TextField id="standard-basic" label="transcription" variant="standard" name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription} />
                     <div className={styles.textError}>{errors.transcription && errors.transcription}</div>
                 </td>
-                <td>
+                <td className={styles.word}>
                     <TextField id="standard-basic" label="russian" variant="standard" name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian} />
                     <div className={styles.textError}>{errors.russian && errors.russian} </div>
                 </td>

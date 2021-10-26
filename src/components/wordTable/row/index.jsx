@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import BtnAction from './btnAction';
 import styles from './index.module.css';
 import TextField from '@mui/material/TextField';
+import { style } from '@mui/system';
 
 
 const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) => {
@@ -40,9 +41,9 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
         }
-        else if (!/^[a-zA-Z\[\]]+$/.test(value.transcription)) {
-            setErrors({ ...errors, transcription: "Только английские буквы" })
-        }
+        /* else if (!/\w.\s+$/.test(value.transcription)) {
+            setErrors({ ...errors, transcription: "Введите транскрипцию" })
+        } */
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
         } else {
@@ -57,29 +58,29 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
     return (
         <React.Fragment>
             {editable
-                ? (<tr>
-                    <td>
+                ? (<tr className={styles.row}>
+                    <td className={styles.word}>
                         <TextField id="standard-basic" variant="standard" name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english} />
                         <span className={styles.textError}>{errors.english && errors.english}</span>
                     </td>
-                    <td>
+                    <td className={styles.word}>
                         <TextField id="standard-basic" variant="standard" name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription} />
                         <span className={styles.textError}>{errors.transcription && errors.transcription}</span>
                     </td>
-                    <td>
+                    <td className={styles.word}>
                         <TextField id="standard-basic" variant="standard" name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian} />
                         <span className={styles.textError}>{errors.russian && errors.russian} </span>
                     </td>
-                    <td>
+                    <td className={styles.btns}>
                         <BtnAction className={styles.btnAction} btnName="save" onClick={handleSave} disabled={isSaveDisabled} />
                         <BtnAction className={styles.btnAction} btnName="cancel" onClick={handleCancel} />
                     </td>
                 </tr>)
-                : (<tr>
-                    <td>{english}</td>
-                    <td>{transcription}</td>
-                    <td>{russian}</td>
-                    <td>
+                : (<tr className={styles.row}>
+                    <td className={styles.word}>{english}</td>
+                    <td className={styles.word}>{transcription}</td>
+                    <td className={styles.word}>{russian}</td>
+                    <td className={styles.btns}>
                         <BtnAction className={styles.btnAction} btnName="edit" onClick={handleEdit} />
                         <BtnAction className={styles.btnAction} btnName="delete" onClick={() => handleDelete(id)} disabled={isDisabledDelete} />
                     </td>
