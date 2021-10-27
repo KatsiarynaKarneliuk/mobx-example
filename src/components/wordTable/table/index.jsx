@@ -64,7 +64,7 @@ const Table = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     </tbody>
                 </table>
                 <div className={styles.btns}>
-                    <button disabled={currentPage === listWords[1]} className={styles.paginationBtn} onClick={prevPage}>Prev Page</button>
+                    <button disabled={currentPage === currentPageRows[1]} className={styles.paginationBtn} onClick={prevPage}>Prev Page</button>
                     <Pagination
                         perPage={perPage} total={listWords.length} paginate={paginate} currentPage={currentPage}
                     />
