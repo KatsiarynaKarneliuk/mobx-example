@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from 'react';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 import Row from '../row';
 import LoadedComponent from '../../isLoading';
 import AddNewWord from '../newword';

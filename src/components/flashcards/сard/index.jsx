@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
 
 function Flashcard(props) {
-    const { english, transcription, russian, key } = props;
+    const { english, transcription, russian, id } = props;
     const [flip, setFlip] = useState(false)
     const [flipCount, setFlipCount] = useState(0)
 
@@ -21,7 +21,7 @@ function Flashcard(props) {
         <div className={flip ? (styles.card + ' flip') : styles.card} >
             {
                 !flip
-                    ? (<div className={styles.cardFront}>{key}
+                    ? (<div className={styles.cardFront}>{id}
                         <div className={styles.english}>{english}</div>
                         <div className={styles.transcription}>{transcription}</div>
                         <button className={styles.button} onClick={handleChange}>Проверить</button>

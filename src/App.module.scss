@@ -1,0 +1,17 @@
+.nav{
+  position: fixed;
+  height:10vh;
+  width: 100%;
+  .appBar{
+    display:flex;
+    justify-content: space-between;
+    .logo img{
+      height: 2em;
+    }
+    .tabs{
+      padding:1%;
+      font-size: 1.2rem;
+    }
+  } 
+}
+

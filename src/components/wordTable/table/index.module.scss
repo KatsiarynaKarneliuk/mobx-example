@@ -69,22 +69,23 @@ caption{
     text-decoration: none;
     color: #444;
     background-color: /* #fff */ #aac9e4 ;
-    box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+    box-shadow: 0 4px 6px rgba(65, 132, 144 ,0.10), 0 1px 3px rgba(0,0,0, 0.08);
     cursor: pointer;
     user-select: none;
     appearance: none;
     touch-action: manipulation;  
     vertical-align: top;
     transition: box-shadow 0.2s;
-    }
-.paginationBtn:focus-visible {
-    border: 1px solid #4c51f9;
-    outline: none;
+        &:focus-visible {
+            border: 1px solid #4c51f9;
+            outline: none;
+        }
+        &:hover {
+            transition: all 0.2s;
+            box-shadow: 0 7px 14px rgba(65, 132, 144 ,0.10), 0 3px 6px rgba(0,0,0, 0.08);
+        }
+        &:active {
+            background-color: #808080;
+        }
 }
-.paginationBtn:hover {
-    transition: all 0.2s;
-    box-shadow: 0 7px 14px rgb(65 132 144 / 10%), 0 3px 6px rgb(0 0 0 / 8%);
-}
-.paginationBtn:active {
-    background-color: #808080;
-}
+

@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import styles from './index.module.css';
+import styles from './index.module.scss';
 import TextField from '@mui/material/TextField';
 import { observer, inject } from "mobx-react";
 import BtnAction from './btnAction';
@@ -36,13 +36,22 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         })
     }
     const handleAdd = () => {
-        if (!/^[a-zA-Z]+$/.test(value.english)) {
+
+        if (!/^[a-zA-Z]+$/.test(value.english) && value.english.length) {
             setErrors({ ...errors, english: "Только английские буквы" })
+        }
+        else if (value.english === 0) {
+            setErrors({ ...errors, english: "Введите слово" })
         }
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
-        } else if (value.english === 0) {
-            setErrors({ ...errors, russian: "введите слово" })
+        }
+
+        else if (value.russian === 0) {
+            setErrors({ ...errors, russian: "Введите слово" })
+        }
+        else if (value.transcription === 0) {
+            setErrors({ ...errors, transcription: "Введите слово" })
         }
         else {
             setAddDisabled(true)
@@ -59,15 +68,15 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         <div className={styles.newWordRow}>
             <tr className={styles.tr}>
                 <td className={styles.word}>
-                    <TextField id="standard-basic" label="english" variant="standard" name={'english'} className={errors.english && styles.error_input} onChange={handleChangeWord} value={value.english} />
+                    <TextField required id="standard-basic" label="english" variant="standard" name={'english'} className={errors.english} onChange={handleChangeWord} value={value.english} />
                     <div className={styles.textError}>{errors.english && errors.english}</div>
                 </td>
                 <td className={styles.word}>
-                    <TextField id="standard-basic" label="transcription" variant="standard" name={'transcription'} className={errors.transcription && styles.error_input} onChange={handleChangeWord} value={value.transcription} />
+                    <TextField required id="standard-basic" label="transcription" variant="standard" name={'transcription'} className={errors.transcription} onChange={handleChangeWord} value={value.transcription} />
                     <div className={styles.textError}>{errors.transcription && errors.transcription}</div>
                 </td>
                 <td className={styles.word}>
-                    <TextField id="standard-basic" label="russian" variant="standard" name={'russian'} className={errors.russian && styles.error_input} onChange={handleChangeWord} value={value.russian} />
+                    <TextField required id="standard-basic" label="russian" variant="standard" name={'russian'} className={errors.russian} onChange={handleChangeWord} value={value.russian} />
                     <div className={styles.textError}>{errors.russian && errors.russian} </div>
                 </td>
                 <td className={styles.btn}>

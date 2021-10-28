@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CardWrapper from '../flashcards/cardWrapper';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 import LoadedComponent from './../isLoading';
 import { observer, inject } from "mobx-react";
 

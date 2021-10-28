@@ -1,6 +1,6 @@
 import React from 'react';
 import Flashcard from '../сard';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 
 
 

@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
 import Flashcard from '../сard';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 import { observer, inject } from "mobx-react";
 import Pagination from './../../pagination'
 
@@ -33,8 +33,8 @@ const Flashcards = inject(['wordsStore'])(observer(({ wordsStore }) => {
         < div >
             <div className={styles.countBtn} variant="outlined">Просмотрено {amountOfChecked} переводов</div>
             <div className={styles.flashcards}>
-                {/* listWords */currentWorsd.map(flashcard => {
-                    return <Flashcard
+                {currentWorsd.map(flashcard => {
+                    return <Flashcard key={flashcard.id}
                         english={flashcard.english}
                         transcription={flashcard.transcription}
                         russian={flashcard.russian}
@@ -52,5 +52,4 @@ const Flashcards = inject(['wordsStore'])(observer(({ wordsStore }) => {
         </div >
     )
 }));
-
 export default Flashcards;
