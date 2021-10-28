@@ -21,7 +21,16 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
 
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
-        setErrors({ ...errors, [e.target.name]: !e.target.value.trim() })
+        /* setErrors({ ...errors, [e.target.name]: !e.target.value.trim() }) */
+        if (value.english.trim() === " ") {
+            setErrors({ ...errors, english: "введите слово" })
+        }
+        else if (value.russian.trim() === " ") {
+            setErrors({ ...errors, russian: "введите слово" })
+        }
+        else if (value.transcription.trim() === " ") {
+            setErrors({ ...errors, transcription: "введите слово" })
+        }
     }
     const handleCancel = (e) => {
         setValue({
@@ -37,21 +46,11 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
     }
     const handleAdd = () => {
 
-        if (!/^[a-zA-Z]+$/.test(value.english) && value.english.length) {
+        if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
-        }
-        else if (value.english === 0) {
-            setErrors({ ...errors, english: "Введите слово" })
         }
         else if (!/^[а-яА-Я]+$/.test(value.russian)) {
             setErrors({ ...errors, russian: "Только на кирилице" })
-        }
-
-        else if (value.russian === 0) {
-            setErrors({ ...errors, russian: "Введите слово" })
-        }
-        else if (value.transcription === 0) {
-            setErrors({ ...errors, transcription: "Введите слово" })
         }
         else {
             setAddDisabled(true)
