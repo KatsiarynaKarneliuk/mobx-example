@@ -43,11 +43,11 @@ const Flashcards = inject(['wordsStore'])(observer(({ wordsStore }) => {
                 })}
             </div>
             <div className={styles.btns}>
-                <button className={styles.countBtn} onClick={prevPage}>Prev Page</button>
+                <button disabled={currentPage === 1} className={styles.countBtn} onClick={prevPage}>Prev Page</button>
                 <Pagination
                     perPage={perPage} total={listWords.length} paginate={paginate} currentPage={currentPage}
                 />
-                <button className={styles.countBtn} onClick={nextPage}>Next Page</button>
+                <button disabled={Math.ceil(listWords.length / perPage) === currentPage} className={styles.countBtn} onClick={nextPage}>Next Page</button>
             </div>
         </div >
     )
