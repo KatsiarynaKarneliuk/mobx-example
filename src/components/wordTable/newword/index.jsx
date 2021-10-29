@@ -22,13 +22,13 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         /* setErrors({ ...errors, [e.target.name]: !e.target.value.trim() }) */
-        if (value.english.trim() === " ") {
+        if (value.english.trim() === "") {
             setErrors({ ...errors, english: "введите слово" })
         }
-        else if (value.russian.trim() === " ") {
+        else if (value.russian.trim() === "") {
             setErrors({ ...errors, russian: "введите слово" })
         }
-        else if (value.transcription.trim() === " ") {
+        else if (value.transcription.trim() === "") {
             setErrors({ ...errors, transcription: "введите слово" })
         }
     }
