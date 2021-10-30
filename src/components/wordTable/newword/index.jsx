@@ -21,8 +21,8 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
 
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
-        /* setErrors({ ...errors, [e.target.name]: !e.target.value.trim() }) */
-        if (value.english.trim() === "") {
+        setErrors({ ...errors, [e.target.name]: !e.target.value.trim() ? "введите слово" : false })
+        /* if (value.english.trim() === "") {
             setErrors({ ...errors, english: "введите слово" })
         }
         else if (value.russian.trim() === "") {
@@ -30,7 +30,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         }
         else if (value.transcription.trim() === "") {
             setErrors({ ...errors, transcription: "введите слово" })
-        }
+        } */
     }
     const handleCancel = (e) => {
         setValue({
@@ -45,7 +45,6 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         })
     }
     const handleAdd = () => {
-
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
         }

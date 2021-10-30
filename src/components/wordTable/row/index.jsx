@@ -32,16 +32,8 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
     }
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
-        /* setErrors({ ...errors, [e.target.name]: !e.target.value.trim() }) */
-        if (value.english.trim() === "") {
-            setErrors({ ...errors, english: "введите слово" })
-        }
-        else if (value.russian.trim() === "") {
-            setErrors({ ...errors, russian: "введите слово" })
-        }
-        else if (value.transcription.trim() === "") {
-            setErrors({ ...errors, transcription: "введите слово" })
-        }
+        setErrors({ ...errors, [e.target.name]: !e.target.value.trim() ? "введите слово" : false })
+
     }
     const handleSave = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
