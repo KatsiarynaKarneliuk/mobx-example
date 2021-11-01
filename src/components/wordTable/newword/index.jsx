@@ -35,7 +35,11 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                         setErrors({ ...errors, russian: "Только на кирилице" })
                     }
                     break;
-                default: setErrors({ ...errors, [e.target.name]: "" })
+                default: setErrors({
+                    english: false,
+                    russian: false,
+                    transcription: false,
+                })
             }
         }
     }
@@ -65,19 +69,19 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         <div className={styles.newWordRow}>
             <tr className={styles.tr}>
                 <td className={styles.word}>
-                    <TextField required id="standard-basic" label="english" variant="standard" name={'english'} className={errors.english} onChange={handleChangeWord} value={value.english} />
-                    <div className={styles.textError}>{errors.english && errors.english}</div>
+                    <TextField required id="standard-basic" label="english" variant="standard" name='english' onChange={handleChangeWord} value={value.english} />
+                    <div className={styles.textError}>{errors && errors.english}</div>
                 </td>
                 <td className={styles.word}>
-                    <TextField required id="standard-basic" label="transcription" variant="standard" name={'transcription'} className={errors.transcription} onChange={handleChangeWord} value={value.transcription} />
-                    <div className={styles.textError}>{errors.transcription && errors.transcription}</div>
+                    <TextField required id="standard-basic" label="transcription" variant="standard" name='transcription' onChange={handleChangeWord} value={value.transcription} />
+                    <div className={styles.textError}>{errors && errors.transcription}</div>
                 </td>
                 <td className={styles.word}>
-                    <TextField required id="standard-basic" label="russian" variant="standard" name={'russian'} className={errors.russian} onChange={handleChangeWord} value={value.russian} />
-                    <div className={styles.textError}>{errors.russian && errors.russian} </div>
+                    <TextField required id="standard-basic" label="russian" variant="standard" name='russian' onChange={handleChangeWord} value={value.russian} />
+                    <div className={styles.textError}>{errors && errors.russian} </div>
                 </td>
                 <td className={styles.btn}>
-                    <BtnAction className={styles.btnAction} btnName="add" onClick={handleAdd} disabled={isAddDisabled}/* {Object.values(errors).some((x) => x !== false)}  */ />
+                    <BtnAction className={styles.btnAction} btnName="add" onClick={handleAdd} disabled={isAddDisabled}/* {Object.values(errors).some((x) => x !== false)} */ />
                     <BtnAction className={styles.btnAction} btnName="cancel" onClick={handleCancel} />
                 </td>
             </tr>
