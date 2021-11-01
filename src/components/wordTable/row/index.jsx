@@ -33,8 +33,8 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: !e.target.value.trim() ? "введите слово" : false })
-
     }
+
     const handleSave = () => {
         if (!/^[a-zA-Z]+$/.test(value.english)) {
             setErrors({ ...errors, english: "Только английские буквы" })
@@ -55,16 +55,16 @@ const Row = ({ english, russian, transcription, id, deleteWord, updateWord }) =>
             {editable
                 ? (<tr className={styles.row}>
                     <td className={styles.word}>
-                        <TextField id="standard-basic" variant="standard" name={'english'} className={errors.english} onChange={handleChangeWord} value={value.english} />
-                        <span className={styles.textError}>{errors.english && errors.english}</span>
+                        <TextField id="standard-basic" variant="standard" name='english' onChange={handleChangeWord} value={value.english} />
+                        <span className={styles.textError}>{errors && errors.english}</span>
                     </td>
                     <td className={styles.word}>
-                        <TextField id="standard-basic" variant="standard" name={'transcription'} className={errors.transcription} onChange={handleChangeWord} value={value.transcription} />
-                        <span className={styles.textError}>{errors.transcription && errors.transcription}</span>
+                        <TextField id="standard-basic" variant="standard" name='transcription' onChange={handleChangeWord} value={value.transcription} />
+                        <span className={styles.textError}>{errors && errors.transcription}</span>
                     </td>
                     <td className={styles.word}>
-                        <TextField id="standard-basic" variant="standard" name={'russian'} className={errors.russian} onChange={handleChangeWord} value={value.russian} />
-                        <span className={styles.textError}>{errors.russian && errors.russian} </span>
+                        <TextField id="standard-basic" variant="standard" name='russian' onChange={handleChangeWord} value={value.russian} />
+                        <span className={styles.textError}>{errors && errors.russian} </span>
                     </td>
                     <td className={styles.btns}>
                         <BtnAction className={styles.btnAction} btnName="save" onClick={handleSave} disabled={isSaveDisabled} />

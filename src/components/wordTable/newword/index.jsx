@@ -21,16 +21,23 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
 
     const handleChangeWord = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
-        setErrors({ ...errors, [e.target.name]: !e.target.value.trim() ? "введите слово" : false })
-        /* if (value.english.trim() === "") {
-            setErrors({ ...errors, english: "введите слово" })
+        if (!e.target.value.trim()) {
+            setErrors({ ...errors, [e.target.name]: "введите слово" })
+        } else {
+            switch (e.target.name) {
+                case 'english':
+                    if (!/^[a-zA-Z]+$/.test(value.english)) {
+                        setErrors({ ...errors, english: "Только английские буквы" })
+                    }
+                    break;
+                case 'russian':
+                    if (!/^[а-яА-Я]+$/.test(value.russian)) {
+                        setErrors({ ...errors, russian: "Только на кирилице" })
+                    }
+                    break;
+                default: setErrors({ ...errors, [e.target.name]: "" })
+            }
         }
-        else if (value.russian.trim() === "") {
-            setErrors({ ...errors, russian: "введите слово" })
-        }
-        else if (value.transcription.trim() === "") {
-            setErrors({ ...errors, transcription: "введите слово" })
-        } */
     }
     const handleCancel = (e) => {
         setValue({
@@ -45,22 +52,14 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
         })
     }
     const handleAdd = () => {
-        if (!/^[a-zA-Z]+$/.test(value.english)) {
-            setErrors({ ...errors, english: "Только английские буквы" })
-        }
-        else if (!/^[а-яА-Я]+$/.test(value.russian)) {
-            setErrors({ ...errors, russian: "Только на кирилице" })
-        }
-        else {
-            setAddDisabled(true)
-            wordsStore.addWord(value)
-            setValue({
-                english: '',
-                russian: '',
-                transcription: '',
-            })
-            setAddDisabled(false)
-        }
+        setAddDisabled(true)
+        wordsStore.addWord(value)
+        setValue({
+            english: '',
+            russian: '',
+            transcription: '',
+        })
+        setAddDisabled(false)
     }
     return (
         <div className={styles.newWordRow}>
@@ -78,7 +77,7 @@ const AddNewWord = inject(['wordsStore'])(observer(({ wordsStore }) => {
                     <div className={styles.textError}>{errors.russian && errors.russian} </div>
                 </td>
                 <td className={styles.btn}>
-                    <BtnAction className={styles.btnAction} btnName="add" onClick={handleAdd} disabled={isAddDisabled} />
+                    <BtnAction className={styles.btnAction} btnName="add" onClick={handleAdd} disabled={isAddDisabled}/* {Object.values(errors).some((x) => x !== false)}  */ />
                     <BtnAction className={styles.btnAction} btnName="cancel" onClick={handleCancel} />
                 </td>
             </tr>
